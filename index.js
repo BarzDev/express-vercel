@@ -2,6 +2,10 @@
 const express = require("express");
 const { apiKeyAuth } = require("@vpriem/express-api-key-auth");
 const dotenv = require("dotenv");
+const Posting = require("./model/posting");
+const connectDB = require("./connectMongo");
+
+connectDB();
 
 // Initialize Express
 const app = express();
@@ -32,6 +36,16 @@ app.get("/json", (req, res) => {
   };
 
   res.json(data);
+});
+
+app.get("/mongo", async (req, res) => {
+  try {
+    const posts = await Posting.find();
+    res.json(posts);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 // Initialize server
