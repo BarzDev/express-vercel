@@ -14,7 +14,6 @@ const app = express();
 dotenv.config();
 const apiKey1 = process.env.API_KEY_1;
 const apiKey2 = process.env.API_KEY_2;
-console.log({ apiKey1, apiKey2 });
 
 // Add midleware auth
 const apiKeyMiddleware = apiKeyAuth([apiKey1, apiKey2]);
